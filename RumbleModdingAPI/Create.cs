@@ -1,7 +1,9 @@
 ﻿//Is there more I can supply here?
 
+using System.Numerics;
 using Il2CppRUMBLE.Interactions.InteractionBase;
 using Il2CppTMPro;
+using Microsoft.VisualBasic;
 using UnityEngine;
 
 namespace RumbleModdingAPI.RMAPI
@@ -10,6 +12,8 @@ namespace RumbleModdingAPI.RMAPI
     {
         public static GameObject newTextGameObject;
         public static GameObject newButtonGameObject;
+        public static GameObject newSwitchGameObject;
+        public static GameObject newSliderGameObject;
 
         /// <summary>
         /// Creates and returns a new Text GameObject
@@ -96,6 +100,114 @@ namespace RumbleModdingAPI.RMAPI
             return newButtonGO;
         }
 
+        /// <summary>
+        /// Creates and returns a new Switch
+        /// </summary>
+        public static GameObject NewSwitch()
+        {
+            GameObject newSwitchGO = GameObject.Instantiate(newSwitchGameObject);
+            newSwitchGO.SetActive(true);
+            newSwitchGO.GetChild(8).gameObject.GetComponent<InteractionSlider>().StepCount = 2;
+            return newSwitchGO;
+        }
+
+        /// <summary>
+        /// Creates and returns a new Switch at the Specified Position/Rotation
+        /// </summary>
+        /// <param name="switchPosition"></param>
+        /// <param name="switchRotation"></param>
+        public static GameObject NewSwitch(Vector3 switchPosition, Quaternion switchRotation)
+        {
+            GameObject newSwitchGO = GameObject.Instantiate(newSwitchGameObject);
+            newSwitchGO.SetActive(true);
+            newSwitchGO.GetChild(8).gameObject.GetComponent<InteractionSlider>().StepCount = 2;
+            newSwitchGO.transform.position = switchPosition;
+            newSwitchGO.transform.rotation = switchRotation;
+            return newSwitchGO;
+        }
+
+        /// <summary>
+        /// Creates and returns a new Switch with the Specified Step Count
+        /// </summary>
+        /// <param name="stepCount"></param>
+        public static GameObject NewSwitch(int stepCount)
+        {
+            GameObject newSwitchGO = GameObject.Instantiate(newSwitchGameObject);
+            newSwitchGO.SetActive(true);
+            newSwitchGO.GetChild(8).gameObject.GetComponent<InteractionSlider>().StepCount = stepCount;
+            return newSwitchGO;
+        }
+
+        /// <summary>
+        /// Creates and returns a new Switch at the Specified Position/Rotation with the Specified Step Count
+        /// </summary>
+        /// <param name="switchPosition"></param>
+        /// <param name="switchRotation"></param>
+        /// <param name="stepCount"></param>
+        public static GameObject NewSwitch(Vector3 switchPosition, Quaternion switchRotation, int stepCount)
+        {
+            GameObject newSwitchGO = GameObject.Instantiate(newSwitchGameObject);
+            newSwitchGO.SetActive(true);
+            newSwitchGO.GetChild(8).gameObject.GetComponent<InteractionSlider>().StepCount = stepCount;
+            newSwitchGO.transform.position = switchPosition;
+            newSwitchGO.transform.rotation = switchRotation;
+            return newSwitchGO;
+        }
+
+        /// <summary>
+        /// Creates and returns a new Slider
+        /// </summary>
+        public static GameObject NewSlider()
+        {
+            GameObject newSliderGO = GameObject.Instantiate(newSliderGameObject);
+            newSliderGO.SetActive(true);
+            newSliderGO.GetChild(7).gameObject.GetComponent<InteractionSlider>().StepCount = 2;
+            return newSliderGO;
+        }
+
+        /// <summary>
+        /// Creates and returns a new Slider at the Specified Position/Rotation
+        /// </summary>
+        /// <param name="sliderPosition"></param>
+        /// <param name="sliderRotation"></param>
+        public static GameObject NewSlider(Vector3 sliderPosition, Quaternion sliderRotation)
+        {
+            GameObject newSliderGO = GameObject.Instantiate(newSliderGameObject);
+            newSliderGO.SetActive(true);
+            newSliderGO.GetChild(7).gameObject.GetComponent<InteractionSlider>().StepCount = 2;
+            newSliderGO.transform.position = sliderPosition;
+            newSliderGO.transform.rotation = sliderRotation;
+            return newSliderGO;
+        }
+
+        /// <summary>
+        /// Creates and returns a new Slider with the Specified Step Count
+        /// </summary>
+        /// <param name="stepCount"></param>
+        public static GameObject NewSlider(int stepCount)
+        {
+            GameObject newSliderGO = GameObject.Instantiate(newSliderGameObject);
+            newSliderGO.SetActive(true);
+            newSliderGO.GetChild(7).gameObject.GetComponent<InteractionSlider>().StepCount = stepCount;
+            return newSliderGO;
+        }
+
+        /// <summary>
+        /// Creates and returns a new Slider at the Specified Position/Rotation with the Specified Step Count
+        /// </summary>
+        /// <param name="sliderPosition"></param>
+        /// <param name="sliderRotation"></param>
+        /// <param name="stepCount"></param>
+        public static GameObject NewSlider(Vector3 sliderPosition, Quaternion sliderRotation, int stepCount)
+        {
+            GameObject newSliderGO = GameObject.Instantiate(newSliderGameObject);
+            newSliderGO.SetActive(true);
+            newSliderGO.GetChild(7).gameObject.GetComponent<InteractionSlider>().StepCount = stepCount;
+            newSliderGO.transform.position = sliderPosition;
+            newSliderGO.transform.rotation = sliderRotation;
+            return newSliderGO;
+        }
+
         internal static void SetupAPIItems()
         {
             if (RumbleModdingAPI.parentAPIItems == null)
@@ -120,6 +232,20 @@ namespace RumbleModdingAPI.RMAPI
                 newButtonGameObject.name = "newButton";
                 newButtonGameObject.SetActive(false);
                 newButtonGameObject.transform.parent = RumbleModdingAPI.parentAPIItems.transform;
+            }
+            if (newSwitchGameObject == null)
+            {
+                newSwitchGameObject = GameObject.Instanstiate(GameObjects.Gym.INTERACTABLES.MenuSlab.Content.Input.StickMovementSetting.Slider.GetGameObject());
+                newSwitchGameObject.name = "newSwitch";
+                newSwitchGameObject.SetActive(false);
+                newSwitchGameObject.transform.parent = RumbleModdingAPI.parentAPIItems.transform
+            }
+            if (newSliderGameObject == null)
+            {
+                newSliderGameObject = GameObject.Instanstiate(GameObjects.Gym.INTERACTABLES.MenuSlab.SideBlock.PageSelectionSlider.GetGameObject());
+                newSliderGameObject.name = "newSlider";
+                newSliderGameObject.SetActive(false);
+                newSliderGameObject.transform.parent = RumbleModdingAPI.parentAPIItems.transform
             }
         }
     }
